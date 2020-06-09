@@ -11,6 +11,45 @@ password = "Passw0rd2018"
 
 connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
 
+#making a cursor,,, keeos state.. (deck of cards )
+
+cursor = connection.cursor
+
+# being a code plumber and investigating
+
 print(connection)
+print(cursor)
+
+query_result = cursor.execute("SELECT * FROM Products")
+
+print(query_result.fetchone())
+
+#fetchone() remember curson maintains state
+# if you want to get back to the start, you need a new curson or to the run the command again
+
+print(query_result.fetchone()) # one less card in the deck
+print(query_result.fetchone()) # one less card in the deck /////
+data_point_card = query_result.fetchone()
+
+# this one entry of data is a 'pyodbc.Row' object
+print(type(data_point_card))
+
+
+# can behave like an iterable list
+print(data_point_card[1])
+
+# makes it like an oop list now... like light! particle and wave
+print(data_point_card.ProductName)
+#
+# fetchall ---> output next all pyodbc.Row into list --- remember cursor maintains state (i.e. deck of cards)
+
+# dangerous - dont use irl as a db could have 1000000 entries
+
+list_of_all_rows = query_result.fetchall()
+
+
+
+
+
 
 
