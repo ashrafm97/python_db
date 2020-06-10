@@ -29,7 +29,7 @@ print(query_result.fetchone())
 
 print(query_result.fetchone()) # one less card in the deck
 print(query_result.fetchone()) # one less card in the deck /////
-data_point_card = query_result.fetchone()
+data_point_card = query_result.fetchone()  # object
 
 # this one entry of data is a 'pyodbc.Row' object
 print(type(data_point_card))
@@ -38,7 +38,7 @@ print(type(data_point_card))
 # can behave like an iterable list
 print(data_point_card[1])
 
-# makes it like an oop list now... like light! particle and wave
+# makes it like an oop list now, where initialized parameters are the column name... like light! particle and wave
 print(data_point_card.ProductName)
 #
 # fetchall ---> output next all pyodbc.Row into list --- remember cursor maintains state (i.e. deck of cards)
@@ -49,7 +49,18 @@ list_of_all_rows = query_result.fetchall()
 
 
 
+while True:
+#     use our query results or cursor with query result and
+#     fetch one at a time
+#    do whatever we want with that data point
+# stop the iteration when there is no more data
+# or when it is none (py) or null (sql)
+row = query_result.fetchone()
+print(row.ProductName,'NOW ONLY' row.ProductPrice * 1.25)
+if row == None:
+    break
 
 
 
+# change the order put if above
 
